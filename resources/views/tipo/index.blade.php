@@ -14,8 +14,8 @@
     <div class="card card-info">
       <div class="card-header">
          <span class="float-right">
-            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Registrar Tipo" data-toggle="modal" data-target="#crear">
-              <i class="fas fa-plus-square"></i>
+            <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#crear">
+              <i class="fas fa-plus-square" data-toggle="tooltip" data-placement="top" title="Registrar Tipo"></i>
             </button>
           </span>
         <h3 class="card-title">Lista de Tipos</h3>
