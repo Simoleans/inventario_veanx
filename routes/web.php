@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth','active']], function () {
 	Route::get('movimiento/egreso/combo/{combo}', 'MovimientoController@egreso_combo')->name('movimiento.egreso_combo');
 	Route::post('movimiento/store/egreso/combo','MovimientoController@store_egreso_combo')->name('store.egreso.combo');
 	Route::get('movimiento/egreso/producto/{producto}', 'MovimientoController@egreso_producto')->name('movimiento.egreso_producto');
-	Route::post('movimiento/store/producto','MovimientoController@store_egreso_producto')->name('store.egreso.producto');
+	Route::post('movimiento/store/egreso/producto','MovimientoController@store_egreso_producto')->name('store.egreso.producto');
 
 	Route::resource('marca', MarcaController::class)->only([
 	    'index', 'store','edit','update','create'
