@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth','active']], function () {
 
 	Route::get('informes','ReporteController@index')->name('reporte.index');
 	Route::post('informe/inventario','ReporteController@inventario')->name('reporte.inventario');
+	Route::post('informe/movimiento','ReporteController@movimientos')->name('reporte.movimiento');
 
 	Route::get('inventario','InventarioController@index')->name('inventario.index');
 

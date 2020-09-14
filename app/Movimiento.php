@@ -16,8 +16,20 @@ class Movimiento extends Model
         });
     }
 
+     public function getProveedorAttribute($value)
+    {
+       return $value ? strtoupper($value) : 'N/T';
+    }
+
     public function user()
     {
     	return $this->belongsTo(User::class);
+    }
+
+    public function scopeFecha($query,$desde,$hasta)
+    {
+        if ($desde && $hasta) {
+             return $query->whereBetween('created_at', [$desde, $hasta]);
+        }
     }
 }

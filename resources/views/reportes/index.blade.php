@@ -44,7 +44,7 @@
         <h3 class="card-title">Busquedas Avanzadas (Movimiento)</h3>
       </div>
       <div class="card-body">
-          <form action="{{ route('pack.store') }}" method="POST">
+          <form action="{{ route('reporte.movimiento') }}" method="POST" target="_blank">
               @csrf
               <div class="row">
                 <div class="input-group mb-3 col-md-6">

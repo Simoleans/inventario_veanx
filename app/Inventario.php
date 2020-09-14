@@ -21,7 +21,7 @@ class Inventario extends Model
 	public function scopeCantidad($query,$cantidad)
 	{
 		if ($cantidad) {
-			return $query->where('cantidad','<',$cantidad);
+			return $query->where('cantidad','<=',$cantidad);
 		}
 	}
 
