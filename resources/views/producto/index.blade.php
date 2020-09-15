@@ -30,9 +30,10 @@
                 <th class="text-center">Atributo</th>
                 <th class="text-center">Ingreso</th>
                 <th class="text-center">Salida</th>
+                <th class="text-center">Eliminar</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="content-producto">
                 @foreach($data as $p)
                   <tr>
                     <td class="text-center">
@@ -49,9 +50,14 @@
                       </a>
                     </td>
                     <td class="text-center">
-                      <a href="{{ route('movimiento.egreso_producto',$p->id) }}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Salida de inventario">
+                      <a href="{{ route('movimiento.egreso_producto',$p->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Salida de inventario">
                         <i class="fas fa-arrow-circle-up"></i>
                       </a>
+                    </td>
+                    <td class="text-center">
+                      <button type="button" class="btn btn-danger btnDelete" data-url="{{ route('producto.destroy',$p->id) }}" data-id="{{ $p->id }}" data-nombre="{{ $p->nombre }}" data-toggle="modal" data-target="#exampleModalCenter">
+                          <i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="Eliminar"></i>
+                      </button>
                     </td>
                   </tr>
                 @endforeach
@@ -61,4 +67,43 @@
     </div>
   </div>
 <!-- /row -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="form-delete"  method="POST">
+          @csrf
+          @method('DELETE')
+        ¿Desea Eliminar a <strong class="text-danger" id="name-producto"></strong>?<br>
+        Se eliminaran todos los movimientos de esté producto.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="submit" class="btn btn-danger">Si</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+  $("#content-producto").on('click', '.btnDelete', function(event) {
+    event.preventDefault();
+    let nombre = $(this).data('nombre');
+    let id = $(this).data('id');
+    let url = $(this).data('url');
+
+    $("#form-delete").attr('action',url);
+    $("#name-producto").text(nombre);
+  });
+</script>
 @endsection

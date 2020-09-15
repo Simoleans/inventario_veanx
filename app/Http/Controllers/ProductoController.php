@@ -75,7 +75,7 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        dd($this->producto->findOrfail(decrypt($id)));
+        return view('producto.edit',['producto' => $this->producto->findOrfail(decrypt($id))]);
     }
 
     /**
@@ -87,7 +87,14 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        $update = $producto->update($request->all());
+
+        if ($update) {
+          return redirect()->route('producto.index')->with('success', 'Se edito el producto exitósamente.');
+
+        }else{
+            return redirect()->route('producto.index')->with('error', '¡Error!');
+        }
     }
 
     /**
@@ -98,6 +105,10 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        //
+        if ($producto->delete()) {
+             return redirect()->route('producto.index')->with('success', 'Se Elimino esté producto correctamente.');
+        }else{
+            return redirect()->route('producto.index')->with('error', '¡Error!');
+        }
     }
 }
